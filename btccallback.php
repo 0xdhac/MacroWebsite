@@ -1,4 +1,4 @@
- <?php
+<?php
 $secret = 's89gknmkas8967jedin8f';
 $txid = $_GET['txid'];
 $value = $_GET['value'];
@@ -6,15 +6,15 @@ $status = $_GET['status'];
 $addr = $_GET['addr'];
 
 //Match secret for security
-if ($_GET['secret'] != $secret) 
+if ($_GET['secret'] != $secret)
 {
-    return;
+  return;
 }
 
-if ($status != 2) 
+if ($status != 2)
 {
-echo "INVALID_STATUS";
-exit;
+  echo "INVALID_STATUS";
+  exit;
 }
 
 include 'includes/dbh.inc.php';
@@ -40,7 +40,6 @@ $row = $result->fetch_array();
 include 'functions.php';
 $email    = $row['email'];
 $price    = $row['price'];
-
 $btcprice = floatval($price);
 
 // Get how much the user has paid and convert it from Satoshis to Bitcoins

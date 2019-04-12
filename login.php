@@ -14,7 +14,7 @@ if(isset($_POST['email']) and isset($_POST['pass']))
 
 	$result = $mysqli->query($query);
 
-	if ($result->num_rows === 0) 
+	if ($result->num_rows === 0)
 	{
 	    echo "ERROR:ACCOUNT_NOT_FOUND";
 	    exit;
@@ -30,6 +30,7 @@ if(isset($_POST['email']) and isset($_POST['pass']))
 		if(!$row['isAdmin'] && $row['banned'])
 		{
 			echo "ERROR:BANNED_ACCOUNT";
+			exit;
 		}
 		else
 		{
@@ -64,7 +65,7 @@ if(isset($_POST['email']) and isset($_POST['pass']))
 else
 {
 	if($_SESSION['auth'] == true)
-	{			
+	{
 		if($_SESSION['admin'] == '1' && $_SERVER['HTTP_USER_AGENT'] != "EasyEdit")
 		{
 			header("Location: control.php");
@@ -83,7 +84,7 @@ function UpdateToken()
 	$username = mysqli_escape_string($mysqli, $_SESSION['email']);
 	$query = "SELECT token FROM user_token WHERE username COLLATE utf8_general_ci LIKE '$username';";
 
-	if (!$result = $mysqli->query($query)) 
+	if (!$result = $mysqli->query($query))
 	{
 		echo "ERROR:QUERY_FAILED";
 		exit;
@@ -119,8 +120,6 @@ function GenerateToken()
 }
 
 ?>
-
-<!--login form, can be done through text forms on this page or by the url-->
 
 <!DOCTYPE html>
 <html>

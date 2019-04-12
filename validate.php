@@ -15,16 +15,10 @@
 			$hash   = mysqli_escape_string($mysqli, $_POST['hash']);
 			$query  = "SELECT count(*) AS c FROM versions WHERE md5 LIKE '$hash'";
 			$result = $mysqli->query($query);
-			if(!$result)
-			{
-				echo "FAILURE0";
-				exit;
-			}
-
 			$row = $result->fetch_assoc();
 			if($row['c'] == 0)
 			{
-				echo "FAILURE1";
+				echo "INVALID_EXE_HASH";
 				exit;
 			}
 
@@ -32,16 +26,10 @@
 			$username = mysqli_escape_string($mysqli, $_SESSION['email']);
 			$query    = "SELECT token FROM user_token WHERE username COLLATE utf8_general_ci LIKE '$username'";
 			$result   = $mysqli->query($query);
-			if(!$result)
-			{
-				echo "FAILURE3";
-				session_destroy();
-				exit;
-			}
 
 			if($result->num_rows == 0)
 			{
-				echo "FAILURE4";
+				echo "TOKEN_NOT_FOUND";
 				session_destroy();
 				exit;
 			}
@@ -49,7 +37,7 @@
 			$row = $result->fetch_assoc();
 			if(strcmp($row['token'], $_SESSION['token']) != 0)
 			{
-				echo "FAILURE5";
+				echo "INVALID_TOKEN";
 				session_destroy();
 				exit;
 			}
@@ -59,5 +47,5 @@
 	}
 	else
 	{
-		echo "FAILURE6";
+		echo "NOT_LOGGED_IN";
 	}

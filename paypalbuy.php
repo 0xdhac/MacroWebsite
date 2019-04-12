@@ -20,9 +20,9 @@ if($result->num_rows == 0)
 $code = $_GET['code'];
 
 //PayPal variables
-$successURL    = 'http://www.oxdmacro.site.nfoservers.com/paypalsuccess.php';
-$cancelURL     = 'http://www.oxdmacro.site.nfoservers.com/paypalcancel.php';
-$notifyURL     = 'http://www.oxdmacro.site.nfoservers.com/paypal_ipn.php';
+$successURL = 'http://www.oxdmacro.site.nfoservers.com/paypalsuccess.php';
+$cancelURL  = 'http://www.oxdmacro.site.nfoservers.com/paypalcancel.php';
+$notifyURL  = 'http://www.oxdmacro.site.nfoservers.com/paypal_ipn.php';
 
 $itemName = '0xD\'s Fortnite Macro';
 $itemNumber = uniqid();

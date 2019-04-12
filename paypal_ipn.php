@@ -70,9 +70,11 @@ if (strcmp($res, "VERIFIED") == 0 || strcasecmp($res, "VERIFIED") == 0){
     $payment_status = $_POST['payment_status'];
     $custom         = $_POST['custom'];
 
+    // Get original transaction id if it is a chargeback
     if($payment_status == 'Reversed'){
       $txn_id = $_POST['parent_txn_id'];
     }
+    
 
     //Check if payment data exists with the same TXN ID.
     $stmt = $mysqli->prepare("SELECT payment_id FROM payments_paypal WHERE txn_id = ?");
